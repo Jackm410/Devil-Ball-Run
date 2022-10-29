@@ -1,0 +1,326 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Asset/Fence.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Asset/block.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Asset/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Asset/finishFlag.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Script/Ball.gd" type="Script" id=5]
+[ext_resource path="res://Import/level3floor.gltf" type="PackedScene" id=6]
+[ext_resource path="res://Import/frogy.tscn" type="PackedScene" id=7]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.5, 0.25, 15 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "camiani"
+length = 22.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 10, 11.5, 22 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 7.06028, 17.1425 ), Vector3( 0, 7.06028, 17.1425 ), Vector3( 0, 7.06028, -6.46816 ), Vector3( 0, 7.06028, -9.20667 ), Vector3( -20.4855, 7.06028, -8.27749 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 10, 11.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -36.893, 0, 0 ), Vector3( -36.893, 0, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Area
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 2.48514, 1, 2.44434 )
+
+[sub_resource type="Animation" id=8]
+length = 25.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 11.5, 13.1, 25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.229594, 20.3916 ), Vector3( 0, 0.349095, 20.7086 ), Vector3( 0, 1.14577, -7.92036 ), Vector3( 1.11141, 1.14577, -14.4943 ), Vector3( -20.5321, 1.14577, -14.4943 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 11.5, 13.1, 25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 90, 0 ), Vector3( 0, 90, 0 ) ]
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="floor" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.84247, -3.06461, 0 )
+
+[node name="level3floor" parent="floor/MeshInstance" instance=ExtResource( 6 )]
+transform = Transform( 0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 4.86752, 3.07907, -0.845741 )
+
+[node name="CollisionShape" type="CollisionShape" parent="floor"]
+shape = SubResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.799758, 0.600323, 0, -0.600323, 0.799758, 0, 7.06028, -8.84153 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
+autoplay = "camiani"
+anims/camiani = SubResource( 7 )
+
+[node name="Fences" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40153, 0.237383, 14.9476 )
+
+[node name="Fence" parent="Fences" instance=ExtResource( 1 )]
+
+[node name="Fence2" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.17767 )
+
+[node name="Fence3" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.32631 )
+
+[node name="Fence4" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.45843 )
+
+[node name="Fence5" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.60332 )
+
+[node name="Fence7" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.7291 )
+
+[node name="Fence8" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.8612 )
+
+[node name="Fence9" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.0061 )
+
+[node name="Fence10" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.1446 )
+
+[node name="Fence11" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.3086 )
+
+[node name="Fence12" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.4599 )
+
+[node name="Fence13" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.6175 )
+
+[node name="Fence14" parent="Fences" instance=ExtResource( 1 )]
+transform = Transform( 0.611472, 0, 0.791266, 0, 1, 0, -0.791266, 0, 0.611472, -2.38419e-07, 0, -25.756 )
+
+[node name="Fences" type="Spatial" parent="Fences"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81031, -0.000908375, -0.00108719 )
+
+[node name="Fence" parent="Fences/Fences" instance=ExtResource( 1 )]
+
+[node name="Fence2" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.17767 )
+
+[node name="Fence3" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.32631 )
+
+[node name="Fence4" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.45843 )
+
+[node name="Fence5" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.60332 )
+
+[node name="Fence6" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0319853, 0, -27.8564 )
+
+[node name="Fence7" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.7291 )
+
+[node name="Fence8" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.8612 )
+
+[node name="Fence9" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.0061 )
+
+[node name="Fence10" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.1446 )
+
+[node name="Fence11" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.3086 )
+
+[node name="Fence12" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.4599 )
+
+[node name="Fence13" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.6175 )
+
+[node name="Fence14" parent="Fences/Fences" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25.756 )
+
+[node name="block" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.981249, 1.47041, 12.7228 )
+
+[node name="block2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04036, 1.36204, 8.61669 )
+
+[node name="block3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03648, 1.43923, 4.15101 )
+
+[node name="block4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.876511, 1.42979, -2.32695 )
+
+[node name="block5" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.801815, 1.42605, -7.62697 )
+
+[node name="block5" parent="block5" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.706901, 0.0949237, -4.85907 )
+
+[node name="finishFlag3" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.0194, 3.81397, -14.6678 )
+
+[node name="Ball" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.662714, 13.9101 )
+script = ExtResource( 5 )
+
+[node name="death" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.277395, 20.5184 )
+script = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="death"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.96456 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="death/CollisionShape"]
+
+[node name="frogy" parent="death/CollisionShape/MeshInstance" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.64744 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="death"]
+autoplay = "deathani"
+anims/deathani = SubResource( 8 )
+
+[node name="Fence6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42801, 0.246323, -15.0478 )
+
+[node name="Fence7" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.33678, 0.246323, -17.212 )
+
+[node name="Fence8" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.205045, 0.246323, -17.212 )
+
+[node name="Fence9" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.96079, 0.246323, -17.212 )
+
+[node name="Fence10" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.96986, 0.246323, -17.212 )
+
+[node name="Fence11" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.03724, 0.246323, -17.212 )
+
+[node name="Fence12" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.26782, 0.246323, -17.212 )
+
+[node name="Fence13" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.532, 0.246323, -17.212 )
+
+[node name="Fence14" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.7481, 0.246323, -17.212 )
+
+[node name="Fence15" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.0442, 0.246323, -17.212 )
+
+[node name="Fence16" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.3191, 0.246323, -17.212 )
+
+[node name="Fence17" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -19.4756, 0.246323, -17.212 )
+
+[node name="Fence18" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.8301, 0.246323, -17.212 )
+
+[node name="Fence19" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.0224, 0.246323, -17.212 )
+
+[node name="Fence20" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.25342, 0.246323, -12.026 )
+
+[node name="Fence21" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.44853, 0.246323, -12.026 )
+
+[node name="Fence22" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.59543, 0.246323, -12.026 )
+
+[node name="Fence23" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.7477, 0.246323, -12.026 )
+
+[node name="Fence24" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.966, 0.246323, -12.026 )
+
+[node name="Fence25" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.0068, 0.246323, -12.026 )
+
+[node name="Fence26" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.1604, 0.246323, -12.026 )
+
+[node name="Fence27" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -19.2826, 0.246323, -12.026 )
+
+[node name="Fence28" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.4148, 0.246323, -12.026 )
+
+[node name="Fence29" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.545, 0.246323, -12.026 )
+
+[node name="Fence30" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25.7141, 0.246323, -12.026 )
+
+[node name="block6" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.56989, 1.42605, -13.894 )
+
+[node name="block7" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.67602, 1.42605, -15.7004 )
+
+[node name="block8" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.1428, 1.42605, -13.5576 )
+
+[node name="block9" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.0458, 1.42605, -15.7004 )
+
+[connection signal="body_entered" from="finishFlag3" to="Ball" method="_on_finishFlag3_body_entered"]
+[connection signal="body_shape_entered" from="death" to="Ball" method="_on_death_body_shape_entered"]

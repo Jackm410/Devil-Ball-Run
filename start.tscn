@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Script/Button.gd" type="Script" id=1]
+[ext_resource path="res://fonts/ferrum.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Asset/untitled.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 120
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 90
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 45
+font_data = ExtResource( 2 )
+
+[node name="start" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -4.76221, -19.0488 )
+scale = Vector2( 0.511027, 0.530123 )
+texture = ExtResource( 3 )
+offset = Vector2( 1920, 1000 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -682.582
+margin_top = -34.9228
+margin_right = 1237.42
+margin_bottom = 410.077
+rect_scale = Vector2( 1.04854, 1.06066 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0.137255, 1 )
+text = "devil ball run"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 174.841
+margin_top = 860.189
+margin_right = 388.842
+margin_bottom = 978.189
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0.921569, 0.113725, 0.435294, 1 )
+custom_colors/font_color = Color( 0, 0.956863, 1, 1 )
+custom_colors/font_color_hover = Color( 0.878431, 0.564706, 0.121569, 1 )
+text = "PLAY!"
+flat = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 17.4614
+margin_top = 407.962
+margin_right = 852.461
+margin_bottom = 788.962
+rect_scale = Vector2( 1.15456, 0.810205 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.101961, 0, 0.960784, 1 )
+text = "use WASD or arrow key to move
+
+run faster than the frog chasing you!
+
+score is based on the second faster than
+the frog"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
